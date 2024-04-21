@@ -26,5 +26,7 @@
       default = self.packages.${pkgs.system}.hyprcursor-phinger;
       hyprcursor-phinger = pkgs.callPackage ./nix/package.nix {inherit pkgs;};
     });
+    homeManagerModules.default = self.homeManagerModules.hyprcursor-phinger;
+    homeManagerModules.hyprcursor-phinger = import ./nix/hm-module.nix self;
   };
 }
