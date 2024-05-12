@@ -57,7 +57,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
       done
 
       # make sure output dir exists
-      mkdir -p "$out/cursors/phinger-cursors-$currentTheme/"
+      mkdir -p "$out/cursors/"
 
       # compile current Hyprcursor theme
       hyprcursor-util --create "$CURSORDIR/$currentTheme/" --output "$out/cursors"
