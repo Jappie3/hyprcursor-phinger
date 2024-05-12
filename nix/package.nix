@@ -35,8 +35,8 @@ pkgs.stdenvNoCC.mkDerivation rec {
         cursorName="$(jq -r ".variants[$i].cursors[$c].name" cursor-theme.json)"
 
         # cat & rg the first SVG in sprites[] to get the hotspot
-        hotspot_x="$(cat "$(jq -r ".variants[$i].cursors[$c].sprites[0].file" cursor-theme.json)" | rg "<rect id=\"center\"" | rg -Po '(?<=x=\")([0-9]*)' || echo 0)"
-        hotspot_y="$(cat "$(jq -r ".variants[$i].cursors[$c].sprites[0].file" cursor-theme.json)" | rg "<rect id=\"center\"" | rg -Po '(?<=y=\")([0-9]*)' || echo 0)"
+        hotspot_x="$(cat "$(jq -r ".variants[$i].cursors[$c].sprites[0].file" cursor-theme.json)" | rg "<rect id=\"center\"" | rg -Po '(?<= x=\")([0-9]*)' || echo 0)"
+        hotspot_y="$(cat "$(jq -r ".variants[$i].cursors[$c].sprites[0].file" cursor-theme.json)" | rg "<rect id=\"center\"" | rg -Po '(?<= y=\")([0-9]*)' || echo 0)"
 
         # get the SVG filename without the [light|dark]/ prefix
         cursorFile="$(jq -r ".variants[0].cursors[0].sprites[0].file" cursor-theme.json | cut -d/ -f2)"
