@@ -45,7 +45,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
         mkdir -p "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName"
         # first remove the hotspot rectangle from the SVG (area between "<g id="hotspot"..." & "</g>", appears as a red dot)
         #                  V check for this regex             if found -> state=1 & next V       check V      V found: if state==1->state=0;next   V if state==0 -> print
-        awk 'BEGIN{state=0}/<g id="hotspot" clip-path="url\(#clip1_[0-9]{4}_[0-9]{4}\)">/{state=1;next}/<\/g>/{if(state){state=0;next}}!state{print}' "$currentTheme/$cursorFile" > tmp && mv tmp "$currentTheme/$cursorFile"
+        awk 'BEGIN{state=0}/<g id="hotspot" clip-path="url\(#clip[0-9]+_[0-9]+_[0-9]+\)">/{state=1;next}/<\/g>/{if(state){state=0;next}}!state{print}' "$currentTheme/$cursorFile" > tmp && mv tmp "$currentTheme/$cursorFile"
         cp "$currentTheme/$cursorFile" "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName/"
 
         # create meta.hl for this SVG under CURSORDIR

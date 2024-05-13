@@ -48,7 +48,7 @@ cursors_directory = cursors_$currentTheme
     # copy the SVG to CURSORDIR
     mkdir -p "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName"
     # first remove the hotspot rectangle from the SVG (area between "<g id="hotspot"..." & "</g>", appears as a red dot)
-    awk 'BEGIN{state=0}/<g id="hotspot" clip-path="url\(#clip1_[0-9]{4}_[0-9]{4}\)">/{state=1;next}/<\/g>/{if(state){state=0;next}}!state{print}' "$currentTheme/$cursorFile" > tmp && mv tmp "$currentTheme/$cursorFile"
+    awk 'BEGIN{state=0}/<g id="hotspot" clip-path="url\(#clip[0-9]+_[0-9]+_[0-9]+\)">/{state=1;next}/<\/g>/{if(state){state=0;next}}!state{print}' "$currentTheme/$cursorFile" > tmp && mv tmp "$currentTheme/$cursorFile"
     cp "$currentTheme/$cursorFile" "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName/"
 
     # create meta.hl for this SVG under CURSORDIR
