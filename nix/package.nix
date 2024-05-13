@@ -51,7 +51,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
     hotspot_x = $(echo "scale=1; $hotspot_x/24" | bc -l | awk '{printf "%.1f\n", $0}')
     hotspot_y = $(echo "scale=1; $hotspot_y/24" | bc -l | awk '{printf "%.1f\n", $0}')
     define_override = $cursorName
-    define_size = 24, $cursorFile
+    define_size = 0, $cursorFile
         " > "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName/meta.hl"
 
       done
