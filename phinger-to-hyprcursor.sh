@@ -50,7 +50,8 @@ cursors_directory = cursors_$currentTheme
     cp "$currentTheme/$cursorFile" "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName/"
 
     # create meta.hl for this SVG under CURSORDIR
-    echo -en "resize_algorithm = bilinear
+    echo -en "
+resize_algorithm = bilinear
 hotspot_x = $(echo "scale=1; $hotspot_x/24" | bc -l | awk '{printf "%.1f\n", $0}')
 hotspot_y = $(echo "scale=1; $hotspot_y/24" | bc -l | awk '{printf "%.1f\n", $0}')
 define_override = $cursorName
