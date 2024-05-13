@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# dependencies: hyprcursor-util, rg, jq, wget
+# dependencies: hyprcursor-util, rg, jq, wget, bc
 
 version="v2.0"
 commit="a7c88739be30a69610b828686a5f00f23095a031"
@@ -50,10 +50,9 @@ cursors_directory = cursors_$currentTheme
     cp "$currentTheme/$cursorFile" "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName/"
 
     # create meta.hl for this SVG under CURSORDIR
-    echo -en "
-resize_algorithm = bilinear
-hotspot_x = $hotspot_x
-hotspot_y = $hotspot_y
+    echo -en "resize_algorithm = bilinear
+hotspot_x = $(echo "scale=1; $hotspot_x/24" | bc -l | awk '{printf "%.1f\n", $0}')
+hotspot_y = $(echo "scale=1; $hotspot_y/24" | bc -l | awk '{printf "%.1f\n", $0}')
 define_override = $cursorName
 define_size = 24, $cursorFile
     " > "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName/meta.hl"
