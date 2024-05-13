@@ -68,5 +68,6 @@ define_size = 24, $cursorFile
 done;
 
 popd
+popd
 
 echo -e "\n\nDone - themes are under $out/cursors\n"
