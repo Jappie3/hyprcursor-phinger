@@ -6,7 +6,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
     url = "https://github.com/phisch/phinger-cursors";
     rev = "a7c88739be30a69610b828686a5f00f23095a031";
   };
-  nativeBuildInputs = with pkgs; [hyprcursor xcur2png jq ripgrep];
+  nativeBuildInputs = with pkgs; [hyprcursor xcur2png jq ripgrep bc];
   phases = ["unpackPhase" "installPhase"];
   installPhase = ''
     runHook preInstall
@@ -48,8 +48,8 @@ pkgs.stdenvNoCC.mkDerivation rec {
         # create meta.hl for this SVG under CURSORDIR
         echo -en "
     resize_algorithm = bilinear
-    hotspot_x = $hotspot_x
-    hotspot_y = $hotspot_y
+    hotspot_x = $(echo "scale=1; $hotspot_x/24" | bc -l | awk '{printf "%.1f\n", $0}')
+    hotspot_y = $(echo "scale=1; $hotspot_y/24" | bc -l | awk '{printf "%.1f\n", $0}')
     define_override = $cursorName
     define_size = 24, $cursorFile
         " > "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName/meta.hl"
