@@ -39,7 +39,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
         hotspot_y="$(cat "$(jq -r ".variants[$i].cursors[$c].sprites[0].file" cursor-theme.json)" | rg "<rect id=\"center\"" | rg -Po '(?<= y=\")([0-9]*)' || echo 0)"
 
         # get the SVG filename without the [light|dark]/ prefix
-        cursorFile="$(jq -r ".variants[0].cursors[0].sprites[0].file" cursor-theme.json | cut -d/ -f2)"
+        cursorFile="$(jq -r ".variants[$i].cursors[$c].sprites[0].file" cursor-theme.json | cut -d/ -f2)"
 
         # copy the SVG to CURSORDIR
         mkdir -p "$CURSORDIR/$currentTheme/cursors_$currentTheme/$cursorName"
