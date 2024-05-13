@@ -19,6 +19,9 @@
         packages = with pkgs; [
           hyprcursor
           xcur2png
+          ripgrep
+          jq
+          bc
         ];
       };
     });
