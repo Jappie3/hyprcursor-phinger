@@ -18,3 +18,5 @@ Usage: add this flake to your inputs, import the HM module & enable it
 ```
 
 The shell script used in the flake is also provided as a standalone bash script in `phinger-to-hyprcursor.sh`. Once compiled, put the Hyprcursor themes under `~/.local/share/icons/` or `~/.icons`.
+
+Note: some programs (notably, GTK) do not support Wayland server-side cursors yet (see https://wiki.hyprland.org/Hypr-Ecosystem/hyprcursor/#important-notes), which means that this Hyprcursor theme will not work for them. To get phinger-cursors to work on those programs, install it in the traditional way as an XCursor theme.
