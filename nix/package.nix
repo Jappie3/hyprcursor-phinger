@@ -63,7 +63,6 @@ pkgs.stdenvNoCC.mkDerivation rec {
           # get the angle, duration & ease from the json file
           local rotationDegrees; rotationDegrees="$(jq -r ".variants[$i].cursors[$c].sprites[0].animations[0].instructions[1].args.degrees" <<< "$JSON")"
           local duration; duration="$(jq -r ".variants[$i].cursors[$c].sprites[0].animations[0].instructions[0].args.duration" <<< "$JSON")"
-          # local totalFrames; totalFrames="$(echo "scale=0; ($duration / 1000) * 25" | bc)"
           local totalFrames; totalFrames=60
           local ease; ease="$(jq -r ".variants[$i].cursors[$c].sprites[0].animations[0].instructions[0].args.ease" <<< "$JSON")"
 
