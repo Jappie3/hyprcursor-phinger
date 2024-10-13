@@ -5,7 +5,7 @@
 set -euo pipefail
 
 version="v2.0"
-commit="a7c88739be30a69610b828686a5f00f23095a031"
+commit="1e674f9a86d768de9f7dc93bb6d9685e25ce9655"
 url="https://github.com/phisch/phinger-cursors/archive/$commit.tar.gz"
 out="/tmp/hyprcursor-phinger"
 

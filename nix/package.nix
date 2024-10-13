@@ -4,7 +4,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
   version = "v2.0";
   src = builtins.fetchGit {
     url = "https://github.com/phisch/phinger-cursors";
-    rev = "a7c88739be30a69610b828686a5f00f23095a031";
+    rev = "1e674f9a86d768de9f7dc93bb6d9685e25ce9655";
   };
   nativeBuildInputs = with pkgs; [hyprcursor xcur2png jq ripgrep bc];
   phases = ["unpackPhase" "installPhase"];
