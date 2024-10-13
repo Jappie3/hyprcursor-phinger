@@ -11,6 +11,8 @@ pkgs.stdenvNoCC.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
+    set -euo pipefail
+
     mkdir -p ./hyprcursor/{dark/cursors,light/cursors}
     local CURSORDIR; CURSORDIR="$(pwd ./hyprcursor)/hyprcursor"
     local JSON; JSON="$(< ./theme/cursor-theme.json)"

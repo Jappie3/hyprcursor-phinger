@@ -2,6 +2,8 @@
 
 # dependencies: hyprcursor-util, awk, rg, jq, wget, bc
 
+set -euo pipefail
+
 version="v2.0"
 commit="a7c88739be30a69610b828686a5f00f23095a031"
 url="https://github.com/phisch/phinger-cursors/archive/$commit.tar.gz"
