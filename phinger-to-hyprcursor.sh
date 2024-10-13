@@ -8,7 +8,7 @@ url="https://github.com/phisch/phinger-cursors/archive/$commit.tar.gz"
 out="/tmp/hyprcursor-phinger"
 
 mkdir -p "$out"
-pushd "$out"
+pushd "$out" || exit
 
 wget "$url"
 tar xzf "$commit.tar.gz" --directory /tmp
@@ -75,7 +75,7 @@ define_override = $cursorName
       fi
 
       # create all the frames, rotating part of the SVG slightly with every frame
-      for f in $(seq 0 $(($totalFrames - 1))); do
+      for f in $(seq 0 $((totalFrames - 1))); do
         # calculate rotation for the current frame using an in-out-cubic ease function
         # largely copied from https://github.com/b3nson/sh.ease
         t=$(echo "scale=6; $f/($totalFrames/2)" | bc -l)

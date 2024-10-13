@@ -72,7 +72,7 @@ pkgs.stdenvNoCC.mkDerivation rec {
           fi
 
           # create all the frames, rotating part of the SVG slightly with every frame
-          for f in $(seq 0 $(($totalFrames - 1))); do
+          for f in $(seq 0 $((totalFrames - 1))); do
             # calculate rotation for the current frame using an in-out-cubic ease function
             # largely copied from https://github.com/b3nson/sh.ease
             local t; t=$(echo "scale=6; $f/($totalFrames/2)" | bc -l)
