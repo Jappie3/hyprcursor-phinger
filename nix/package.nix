@@ -126,10 +126,10 @@ pkgs.stdenvNoCC.mkDerivation rec {
       done
 
       # make sure output dir exists
-      mkdir -p "$out/cursors/"
+      mkdir -p "$out/share/icons/"
 
       # compile current Hyprcursor theme
-      hyprcursor-util --create "$CURSORDIR/$currentTheme/" --output "$out/cursors"
+      hyprcursor-util --create "$CURSORDIR/$currentTheme/" --output "$out/share/icons"
 
       popd || exit
 
