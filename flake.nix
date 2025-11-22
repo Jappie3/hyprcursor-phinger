@@ -5,36 +5,32 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-    }:
-    let
-      forAllSystems =
-        function:
-        nixpkgs.lib.genAttrs [
-          "aarch64-linux"
-          "x86_64-linux"
-        ] (system: function nixpkgs.legacyPackages.${system});
-    in
-    {
-      devShells = forAllSystems (pkgs: {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-            hyprcursor
-            xcur2png
-            ripgrep
-            jq
-            bc
-          ];
-        };
-      });
-      packages = forAllSystems (pkgs: {
-        default = self.packages.${pkgs.system}.hyprcursor-phinger;
-        hyprcursor-phinger = pkgs.callPackage ./nix/package.nix { inherit pkgs; };
-      });
-      homeManagerModules.default = self.homeManagerModules.hyprcursor-phinger;
-      homeManagerModules.hyprcursor-phinger = import ./nix/hm-module.nix self;
-    };
+  outputs = {
+    self,
+    nixpkgs,
+  }: let
+    forAllSystems = function:
+      nixpkgs.lib.genAttrs [
+        "aarch64-linux"
+        "x86_64-linux"
+      ] (system: function nixpkgs.legacyPackages.${system});
+  in {
+    devShells = forAllSystems (pkgs: {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          hyprcursor
+          xcur2png
+          ripgrep
+          jq
+          bc
+        ];
+      };
+    });
+    packages = forAllSystems (pkgs: {
+      default = self.packages.${pkgs.stdenv.hostPlatform.system}.hyprcursor-phinger;
+      hyprcursor-phinger = pkgs.callPackage ./nix/package.nix {inherit pkgs;};
+    });
+    homeManagerModules.default = self.homeManagerModules.hyprcursor-phinger;
+    homeManagerModules.hyprcursor-phinger = import ./nix/hm-module.nix self;
+  };
 }
